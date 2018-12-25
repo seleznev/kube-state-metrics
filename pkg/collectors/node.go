@@ -203,9 +203,21 @@ var (
 							Value: float64(val.MilliValue()) / 1000,
 						})
 					case v1.ResourceStorage:
-						fallthrough
+						f = append(f, &metrics.Metric{
+							LabelValues: []string{
+								sanitizeLabelName(string(resourceName)),
+								string(constant.UnitByte),
+							},
+							Value: float64(val.MilliValue()) / 1000,
+						})
 					case v1.ResourceEphemeralStorage:
-						fallthrough
+						f = append(f, &metrics.Metric{
+							LabelValues: []string{
+								sanitizeLabelName(string(resourceName)),
+								string(constant.UnitByte),
+							},
+							Value: float64(val.MilliValue()) / 1000,
+						})
 					case v1.ResourceMemory:
 						f = append(f, &metrics.Metric{
 							LabelValues: []string{
